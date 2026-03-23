@@ -1,0 +1,56 @@
+Task 3 — Create Amazon Redshift Cluster (Serverless Implementation)
+
+Objective:
+The objective of this task is to create an Amazon Redshift environment and configure it to access data stored in Amazon S3 using an IAM role. Instead of creating a traditional cluster, Amazon Redshift Serverless was used. Redshift Serverless provides the same functionality as Amazon Redshift but without manually creating and managing nodes.
+
+Step 1 — Open Amazon Redshift Console
+
+Login to the AWS Management Console.
+Search for Amazon Redshift in the services search bar.
+Open the Amazon Redshift Serverless dashboard.
+
+Step 2 — Create a Namespace
+A namespace stores database objects such as tables, users, and permissions.
+Steps followed:
+
+Click on Create Workgroup.
+Select Create New Namespace.
+Enter the following details:
+Namespace Name: telecom-namespace
+Database Name: dev
+Admin Username: admin
+Admin Password: ********
+
+Step 3 — Create a Workgroup
+A workgroup provides compute resources required to run SQL queries.
+Configuration used:
+Workgroup Name: telecom-workgroup
+Base Capacity: 8 RPUs
+VPC: Default VPC
+Subnets: Automatically selected
+Security: SSL Enabled
+
+After entering the configuration, the Review and Create button was clicked to complete the setup.
+
+Step 4 — Configure IAM Role for S3 Access
+To allow Redshift to load data from Amazon S3, an IAM role was created and attached.
+Steps followed:
+
+Open the IAM service.
+Click Roles → Create Role.
+Select AWS Service → Redshift.
+Attach the policy AmazonS3FullAccess.
+Role name created: RedshiftS3Role.
+The role was then attached to the Redshift namespace.
+
+Step 5 — Verification
+After creation, the following resources were successfully created:
+Namespace: telecom-namespace
+Workgroup: telecom-workgroup
+Database: dev
+IAM Role: RedshiftS3Role
+
+The Redshift Serverless endpoint was also generated successfully and the system is ready for loading data from Amazon S3.
+
+Conclusion:
+Amazon Redshift Serverless was successfully created and configured. The environment is now ready to create tables, load data from S3, and perform SQL queries for data analysis.
