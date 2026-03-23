@@ -1,0 +1,59 @@
+Task 6 — Create Analytical Table
+
+Objective:
+Create a final analytical table by joining the customer_churn table with the telecom_population dataset. This table will be used for analysis and reporting.
+
+Final Table Columns:
+- customer_id
+- city
+- zip_code
+- population
+- tenure
+- monthly_charges
+- total_charges
+- customer_status
+
+Design Considerations:
+- Use DISTKEY(zip_code) to distribute data based on zip codes for faster joins.
+- Use SORTKEY(customer_id) to optimize query performance on customer-level analytics.
+
+SQL Steps:
+
+1. Create the analytical table
+CREATE TABLE IF NOT EXISTS customer_analytics (
+    customer_id VARCHAR(20),
+    city VARCHAR(50),
+    zip_code VARCHAR(10),
+    population INT,
+    tenure VARCHAR(10),
+    monthly_charges VARCHAR(20),
+    total_charges VARCHAR(20),
+    customer_status VARCHAR(20)
+)
+DISTKEY(zip_code)
+SORTKEY(customer_id);
+
+2. Insert data by joining staging tables
+INSERT INTO customer_analytics (customer_id, city, zip_code, population, tenure, monthly_charges, total_charges, customer_status)
+SELECT 
+    c.customer_id,
+    c.city,
+    c.zip_code,
+    p.population,
+    c.tenure,
+    c.monthly_charges,
+    c.total_charges,
+    c.customer_status
+FROM customer_churn c
+LEFT JOIN telecom_population p
+ON c.zip_code = p.zipcode;
+
+Notes:
+- Ensure the column names in customer_churn match the CSV dataset exactly.
+- Use LEFT JOIN to include all customers even if population data for some zip codes is missing.
+- This table serves as the final analytical table for reporting and further analysis.
+
+Result:
+- The customer_analytics table is populated with combined customer and population data.
+- Total rows inserted depend on the number of records in customer_churn.
+- The table is optimized with DISTKEY and SORTKEY for query performance.
