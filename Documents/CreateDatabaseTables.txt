@@ -1,0 +1,56 @@
+Task 4 — Create Database Tables
+
+Objective:
+Create staging tables in Amazon Redshift Serverless to load raw telecom customer churn data and zip code population data, using appropriate data types for each column.
+
+Step 1 — Open Redshift Query Editor:
+
+Login to AWS Management Console.
+Open Amazon Redshift Serverless.
+Click Query Data.
+Select the database named dev.
+Open the query editor.
+
+Step 2 — Create Customer Churn Table:
+A staging table for telecom customer churn data with customer demographics, tenure, billing details, and churn status.
+
+CREATE TABLE customer_churn (
+    customer_id VARCHAR(20),
+    gender VARCHAR(10),
+    age INT,
+    city VARCHAR(50),
+    zip_code VARCHAR(10),
+    tenure INT,
+    monthly_charges DECIMAL(10,2),
+    total_charges DECIMAL(10,2),
+    customer_status VARCHAR(20)
+);
+
+Step 3 — Create Zip Population Table:
+A staging table for California zip code population data.
+
+CREATE TABLE zip_population (
+    zip_code VARCHAR(10),
+    population INT
+);
+
+Step 4 — Data Types Used:
+
+VARCHAR → text fields: customer_id, gender, city, zip_code
+INT → numeric fields: age, tenure, population
+DECIMAL(10,2) → monetary fields: monthly_charges, total_charges
+
+Step 5 — Verification:
+Query the schema to ensure tables were created:
+
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'public';
+
+Expected tables:
+
+customer_churn
+zip_population
+
+Conclusion:
+The staging tables were successfully created with appropriate data types and are ready for loading raw data from Amazon S3.
