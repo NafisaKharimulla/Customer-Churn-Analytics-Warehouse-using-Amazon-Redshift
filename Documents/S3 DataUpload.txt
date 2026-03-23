@@ -1,0 +1,66 @@
+Customer Churn Analytics Warehouse using Amazon Redshift
+
+Task 2 — Create S3 Storage
+
+Objective
+The objective of this task is to create an Amazon S3 bucket to store the raw telecom customer churn dataset that will later be loaded into Amazon Redshift for analysis.
+
+Steps Performed
+
+Step 1: Log in to the AWS Management Console.
+
+Step 2: In the search bar, search for Amazon S3 and open the Amazon S3 service.
+
+Step 3: Click on the "Create bucket" button.
+
+Step 4: Enter a unique bucket name.
+Bucket name used:
+telecom-redshift-assignment-2026
+
+Step 5: Select the AWS Region (Asia Pacific – Mumbai) and keep all other settings as default.
+
+Step 6: Click on "Create bucket" to create the S3 bucket.
+
+Creating Folder Structure
+
+Step 7: Open the created bucket telecom-redshift-assignment-2026.
+
+Step 8: Click on "Create folder".
+
+Step 9: Enter the folder name:
+raw
+
+Step 10: Click on "Create folder".
+
+Uploading Dataset Files
+
+Step 11: Open the raw folder.
+
+Step 12: Click on the "Upload" button.
+
+Step 13: Select the following files from the local system:
+
+telecom_customer_churn.csv
+telecom_zipcode_population.csv
+
+Step 14: Click on "Upload" to upload both files to the S3 bucket.
+
+Final S3 Bucket Structure
+
+After uploading the files, the bucket structure is:
+
+telecom-redshift-assignment-2026
+   raw
+      telecom_customer_churn.csv
+      telecom_zipcode_population.csv
+
+Verified File Paths
+
+The following S3 file paths were successfully created:
+
+s3://telecom-redshift-assignment-2026/raw/telecom_customer_churn.csv
+s3://telecom-redshift-assignment-2026/raw/telecom_zipcode_population.csv
+
+Outcome of Task 2
+
+The Amazon S3 bucket was successfully created and the dataset files were uploaded into the raw folder. The data is now ready to be loaded into Amazon Redshift in the next task.
