@@ -1,0 +1,20 @@
+# Task 8 — Redshift Processing and Optimization
+
+## Objective
+Improve the performance and efficiency of Amazon Redshift Serverless by performing routine maintenance operations on the database tables.
+
+## Operations
+
+1. ANALYZE
+   - Updates the statistical metadata for each table.
+   - Allows the query optimizer to make informed decisions about the most efficient query execution plan.
+   - Recommended after significant data loads or updates.
+
+2. VACUUM FULL
+   - Reclaims unused storage space left after deletions or updates.
+   - Re-sorts table rows according to the SORTKEY for faster access.
+   - Helps reduce storage fragmentation and improves query performance.
+   - Recommended after bulk inserts, updates, or deletions.
+
+## Summary
+Performing ANALYZE and VACUUM regularly ensures that Redshift queries run efficiently and storage is optimized. Together, they maintain database health, reduce latency, and improve overall performance.
