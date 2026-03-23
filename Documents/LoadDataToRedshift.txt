@@ -1,0 +1,61 @@
+Task 5 — Load Data into Redshift
+Objective:
+Load data from Amazon S3 into Redshift tables following best practices, including handling headers, CSV format, and delimiters.
+
+Steps:
+
+1. Ensure IAM Role is created and associated with your Redshift Serverless namespace/workgroup:
+   - Role Name: RedshiftS3Role
+   - Permissions: AmazonRedshiftAllCommandsFullAccess
+   - Purpose: Allows Redshift to access S3 for COPY operations
+
+2. Verify your Redshift tables are created with correct columns and data types:
+   - Example: telecom_population
+     CREATE TABLE telecom_population (
+         zipcode VARCHAR(10),
+         population INT
+     );
+
+   - Example: customer_churn (matches CSV columns)
+     CREATE TABLE customer_churn (
+         customer_id VARCHAR(20),
+         gender VARCHAR(10),
+         age VARCHAR(10),
+         married VARCHAR(10),
+         num_dependents VARCHAR(10),
+         city VARCHAR(50),
+         zip_code VARCHAR(10),
+         latitude VARCHAR(20),
+         longitude VARCHAR(20),
+         num_referrals VARCHAR(10)
+     );
+
+3. Use COPY command to load data from S3:
+
+   -- Load telecom_population
+   COPY telecom_population
+   FROM 's3://telecom-redshift-assignment-2026/raw/telecom_zipcode_population.csv'
+   IAM_ROLE 'arn:aws:iam::688927626637:role/RedshiftS3Role'
+   CSV
+   IGNOREHEADER 1;
+
+   -- Load customer_churn
+   COPY customer_churn
+   FROM 's3://telecom-redshift-assignment-2026/raw/telecom_customer_churn.csv'
+   IAM_ROLE 'arn:aws:iam::688927626637:role/RedshiftS3Role'
+   CSV
+   IGNOREHEADER 1
+   DELIMITER ','
+   EMPTYASNULL
+   BLANKSASNULL;
+
+4. Verify the data load:
+   - Run SELECT queries in Redshift Query Editor:
+     SELECT * FROM telecom_population LIMIT 20;
+     SELECT * FROM customer_churn LIMIT 20;
+   - Ensure records are loaded successfully and match the source CSV.
+
+Notes:
+- Ensure that the column names and order in the Redshift table match the CSV file exactly.
+- Use EMPTYASNULL and BLANKSASNULL options to handle missing values.
+- COPY from S3 is the recommended and efficient method for bulk loading data into Redshift.
